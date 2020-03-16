@@ -21,7 +21,7 @@ Computes and retuns a DSSP file.
 A drawback of this function is that it depends on DSSP's server and in ocasions it can take a long time to process the request.
 }
 \examples{
-compute.dssp(pdb = '3cwm', destfile = './')
+\dontrun{compute.dssp(pdb = '3cwm', destfile = './')}
 }
 \references{
 Touw et al (2015) Nucl. Ac. Res. 43(Database issue): D364-D368 (PMID: 25352545).

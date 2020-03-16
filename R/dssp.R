@@ -18,8 +18,8 @@
 #' @details If the argument 'keepfiles' is not set to TRUE, the dssp file used to get the parsed dataframe will be removed.
 #' @return Returns a dataframe providing data for 'acc', 'ss', 'phi' and 'psi' for each residues from the structure.
 #' @author Juan Carlos Aledo
-#' @examples download.dssp('3cwm')
-#' parse.dssp('3cwm.dssp')
+#' @examples \dontrun{compute.dssp('3cwm')
+#' ## Then: parse.dssp('3cwm.dssp')}
 #' @references Touw et al (2015) Nucl. Ac. Res. 43(Database issue): D364-D368 (PMID: 25352545).
 #' @seealso download.dssp(), compute.dssp(), mkdssp() and acc.dssp()
 #' @export
@@ -122,7 +122,7 @@ parse.dssp <- function(file, keepfiles = FALSE){
 #' @details A drawback of this function is that it depends on DSSP's server and in ocasions it can take a long time to process the request.
 #' @return an online computed dssp file that is saved at the indicated location.
 #' @author Juan Carlos Aledo
-#' @examples compute.dssp(pdb = '3cwm', destfile = './')
+#' @examples \dontrun{compute.dssp(pdb = '3cwm', destfile = './')}
 #' @references Touw et al (2015) Nucl. Ac. Res. 43(Database issue): D364-D368 (PMID: 25352545).
 #' @seealso download.dssp(), parse.dssp(), mkdssp() and acc.dssp()
 #' @importFrom httr content
