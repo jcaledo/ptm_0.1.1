@@ -443,7 +443,7 @@ id.mapping <- function(id, from, to){
 #' @details By default the the function provides info regarding the following features: id, reviewed, entry name and organism. If wished, this list of features can be expanded using the argument 'features'. There is a larga list of features that can be retrieved. You can look up your relevant feature's name in the full list of UniProtKB found at https://www.uniprot.org/help/uniprotkb_column_names.
 #' @return Returns a named list with the requested features.
 #' @author Juan Carlos Aledo
-#' @examples id.features('P04406', features = 'ec,keywords,database(PDB)')
+#' @examples \dontrun{id.features('P04406', features = 'ec,keywords,database(PDB)')}
 #' @seealso species.mapping()
 #' @importFrom httr GET
 #' @importFrom httr content
