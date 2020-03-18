@@ -179,7 +179,7 @@ res.dist <- function(pdb, rA, chainA, rB, chainB, backbone = FALSE, hatoms = FAL
 #' @param backbone logical, when TRUE it means that we include those atoms belonging to the main chain (CA, N, O and C) beside all the side chain atoms.
 #' @details The identity of the closest Aa is given as an attribute.
 #' @return Numerical value indicating the distance in ångströms (Å).
-#' @examples dist2closest(pdb = '1q8k', chain = 'A', res = 222, aa = 'S')
+#' @examples \dontrun{dist2closest(pdb = '1q8k', chain = 'A', res = 222, aa = 'S')}
 #' @seealso res.dist(), pairwise.dist(), ball()
 #' @importFrom bio3d get.pdb
 #' @importFrom bio3d read.pdb

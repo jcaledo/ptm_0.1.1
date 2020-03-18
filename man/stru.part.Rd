@@ -31,7 +31,7 @@ Rim: ACCc > cutoff & (ACCm - ACCc) > 0.
 Core: ACCm > cutoff & ACCc < cutoff.
 }
 \examples{
-stru.part('1u8f')
+\dontrun{stru.part('1u8f')}
 }
 \references{
 Levy (2010) J. Mol. Biol. 403: 660-670 (PMID: 20868694).

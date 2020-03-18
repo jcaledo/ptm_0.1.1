@@ -21,7 +21,7 @@ Computes online surface energies using the Getarea server.
 If the option keepfiles is set as TRUE, then txt and Rda files are saved in the working directory.
 }
 \examples{
-get.area('3cwm')
+\dontrun{get.area('3cwm')}
 }
 \references{
 Fraczkiewicz, R. and Braun, W. (1998) J. Comp. Chem., 19, 319-333.
