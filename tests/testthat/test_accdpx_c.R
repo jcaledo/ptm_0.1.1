@@ -59,6 +59,12 @@ test_that("acc.dssp() works properly",{
   expect_equal(ncol(d), 11)
   expect_true('A' %in% unique(a$chain))
 
+  a <- acc.dssp('1h9d') # pdb contain non-protein chains
+
+  expect_is(a, 'data.frame')
+  expect_equal(nrow(a), 504)
+  expect_equal(ncol(a), 11)
+
 })
 
 ## ---------------------------------------------- ##

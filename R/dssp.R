@@ -164,7 +164,9 @@ compute.dssp <- function(pdb, destfile = './'){
   if (response_status$status_code == 200){
     job_status <- httr::content(response_status)
     ready <- FALSE
-    while(!ready){
+    attempts <- 0
+    while(!ready & attempts < 3){
+      attempts <- attempts + 1
       if (job_status == 'SUCCESS'){
         ready = TRUE
       } else if (job_status %in% c('FAILURE', 'REVOKED')){
@@ -177,6 +179,10 @@ compute.dssp <- function(pdb, destfile = './'){
     if (del){ # if a pdb file was downloaded now is delated
       file.remove(file)
     }
+    if (job_status != 'SUCCESS'){
+      stop("After three attempts the server didn't responde")
+    }
+
     t <- strsplit(file, split = "\\/")[[1]] # name and location of the saved file
     # pdb_id <- substring(t[length(t)], 1,4)
     pdb_id <- strsplit(t[length(t)], split = "\\.")[[1]][1]

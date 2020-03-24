@@ -110,6 +110,8 @@ test_that('ptm.scan() works properly', {
 
   a <- suppressWarnings(ptm.scan('P01009'))
   b <- suppressWarnings(ptm.scan('O14757'))
+  c <- suppressWarnings(ptm.scan('G3SB67')) # without described ptm
+  d <- suppressWarnings(ptm.scan('Q15796')) # without meto
   # Avoid warnings when a modification is not present in the protein
 
   expect_is(a, 'data.frame')
@@ -119,6 +121,13 @@ test_that('ptm.scan() works properly', {
   expect_is(b, 'data.frame')
   expect_equal(nrow(b), 54)
   expect_equal(ncol(b), 15)
+
+  expect_is(c, 'character')
+  expect_true(grepl("Sorry", c))
+
+  expect_is(d, 'data.frame')
+  expect_equal(nrow(d), 37)
+  expect_equal(ncol(d), 15)
 })
 
 ## ---------------------------------------------- ##
@@ -128,6 +137,8 @@ test_that('reg.scan() works properly', {
 
   a <- reg.scan('O14757')
   b <- reg.scan('P01009')
+  c <- suppressWarnings(reg.scan('G3SB67'))  # without described ptm
+  d <- reg.scan('Q15796') # without meto
 
   expect_is(a, 'data.frame')
   expect_equal(nrow(a), 6)
@@ -138,6 +149,15 @@ test_that('reg.scan() works properly', {
   expect_equal(nrow(b), 3)
   expect_equal(ncol(b), 4)
   expect_equal(b$modification[3], "M358-ox")
+
+  expect_is(c, 'character')
+  expect_true(grepl("Sorry", c))
+
+  expect_is(d, 'data.frame')
+  expect_equal(nrow(d), 12)
+  expect_equal(ncol(d), 4)
+  expect_true(d$database[1] == 'PSP')
+
 })
 
 ## ---------------------------------------------- ##

@@ -519,18 +519,22 @@ ptm.scan <- function(up_id, renumerate = TRUE){
     }
   }
 
-
-  # output <- output[rowSums(is.na(output[, 3:12])) != 10,]
   output <- output[rowSums(is.na(output[, 4:14])) != 11,]
-  o <- as.matrix(output)
-  output$multi <- NA
-  for (i in 1:nrow(o)){
-    # output$multi[i] <- sum(as.logical(o[i,3:10]), na.rm = TRUE)
-    output$multi[i] <- sum(as.logical(o[i,4:12]), na.rm = TRUE)
+
+  if (nrow(output) == 0){
+    output <- "Sorry, no modification sites were found for this protein"
+  } else {
+    o <- as.matrix(output)
+    output$multi <- NA
+    for (i in 1:nrow(o)){
+      # output$multi[i] <- sum(as.logical(o[i,3:10]), na.rm = TRUE)
+      output$multi[i] <- sum(as.logical(o[i,4:12]), na.rm = TRUE)
+    }
   }
 
   attr(output, 'prot_id') <- up_id
   attr(output, 'prot_length') <- length(seq)
+
   return(output)
 }
 
@@ -556,30 +560,38 @@ reg.scan <- function(up_id){
   call <- paste(baseUrl, "reg_db_", up_id, ".Rda?raw=true", sep = "")
   resp <- try(load(url(call)), silent = TRUE)
   if (inherits(resp, "try-error")) {
+    t <- data.frame()
+  } else {
+    t <-  reg_db[which(reg_db$up_id == up_id),]
+  }
+
+  m <- meto.scan(up_id, report = 2)
+  if (length(m$Metosites) != 0){
+    tt <- m$Metosites[which(m$Metosites$reg_id > 2), ]
+
+    if (nrow(tt) > 0){
+      meto <- as.data.frame(matrix(rep(NA, 4*nrow(tt)), ncol = 4))
+      names(meto) <- c('up_id','organism', 'modification', 'database')
+      for (i in 1:nrow(tt)){
+        meto$up_id[i] <- up_id
+        meto$organism[i] <- m$prot_sp
+        meto$modification[i] <- paste("M", tt$met_pos[i], "-ox", sep = "")
+        meto$database[i] <- 'MetOSite'
+      }
+      if (nrow(t) > 0){
+        t <- rbind(t, meto)
+      } else {
+        t <- meto
+      }
+    }
+  }
+
+  if (nrow(t) > 0){
+    return(t)
+  } else {
     text <- "Sorry, no modification sites were found for this protein"
     return(text)
   }
-
-  t <-  reg_db[which(reg_db$up_id == up_id),]
-  m <- meto.scan(up_id, report = 2)
-  tt <- m$Metosite[which(meto.scan(up_id)$Metosite$reg_id > 2),]
-  if (nrow(tt) > 0){
-    meto <- as.data.frame(matrix(rep(NA, 4*nrow(tt)), ncol = 4))
-    names(meto) <- c('up_id','organism', 'modification', 'database')
-    for (i in 1:nrow(tt)){
-      meto$up_id[i] <- up_id
-      meto$organism[i] <- m$prot_sp
-      meto$modification[i] <- paste("M", tt$met_pos[i], "-ox", sep = "")
-      meto$database[i] <- 'MetOSite'
-    }
-    if (nrow(t) > 0){
-      t <- rbind(t, meto)
-    } else {
-      t <- meto
-    }
-  }
-
-  return(t)
 }
 
 ## ---------------------------------------------------------------- ##

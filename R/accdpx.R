@@ -78,6 +78,7 @@ acc.dssp <- function(pdb, dssp = 'compute', aa = 'all'){
   df$delta_acc <- NA
 
   ## --------- Get dssp files for individual chains  --------- ##
+  chains <- unique(df$chain) # Sometimes we have to remove non-protein chains
   chain_files <- paste('./split_chain/', id, '_', chains,  '.pdb', sep = "")
   dssp_files <- paste('./split_chain/', id, '_', chains, '.dssp', sep = "")
   if (dssp == 'compute'){
@@ -420,6 +421,7 @@ atom.dpx <- function(pdb){
 
   counter_a <- 0
   for (i in seq_len(length(chains))){
+    # print(chains[i])
     t <- paste('./split_chain/', id, '_', chains[i], '.pdb', sep = "")
     atom_chain <- dpx(t)
     counter_b <- counter_a + nrow(atom_chain)

@@ -27,7 +27,7 @@ Computes the distance to the closest amino acid of the indicated type
 The identity of the closest Aa is given as an attribute.
 }
 \examples{
-dist2closest(pdb = '1q8k', chain = 'A', res = 222, aa = 'S')
+\dontrun{dist2closest(pdb = '1q8k', chain = 'A', res = 222, aa = 'S')}
 }
 \seealso{
 res.dist(), pairwise.dist(), ball()
