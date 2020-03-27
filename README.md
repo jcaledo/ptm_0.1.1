@@ -1,6 +1,6 @@
 # ptm_0.1.1
 
-R package for the analysis of post-translational modifications, with particular emphasis on the sulfoxidation (oxidation) of methionine residues.
+An R package for the analysis of post-translational modifications, with particular emphasis on the sulfoxidation (oxidation) of methionine residues.
 
 ## Contributing
 
